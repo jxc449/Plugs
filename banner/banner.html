@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="css/banner.css" type="text/css" />
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.js"></script>
+</head>
+
+<body style="background-color: #cfcfde;">
+
+<!--首页广告轮播效果start-->
+<div id="picShow">
+  <!--<div class="banner" idx="{$i}" style="background-image:url('/Style/JinDa/images/index/banner.png')"></div>-->
+<div class="pic">
+        <div class="pic-content">
+           <ul class="pic-ul">
+              <li><img src="images/1.jpg"/></li>
+              <li><img src="images/2.jpg"/></li>
+              <li><img src="images/3.jpg"/></li>
+              <li><img src="images/4.jpg"/></li>
+              <li><img src="images/5.jpg"/></li>
+           </ul>
+          <ol class="dots">
+            <li class="dot active">1</li>
+            <li class="dot">2</li>
+            <li class="dot">3</li>
+            <li class="dot">4</li>
+            <li class="dot">5</li>
+          </ol>
+        </div>
+    </div>
+</div>
+<!--首页广告轮播效果end-->
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+    var curIndex = 0;
+	  var autoChange = setInterval(function () {
+        if (curIndex < $("#picShow .pic-ul li").length - 1) { curIndex++; }
+        else { curIndex = 0;}
+        changeTo(curIndex);
+    }, 2000);
+
+    $("#picShow .dots").find("li").each(function (item) {
+        $(this).hover(function () {
+            clearInterval(autoChange);
+            changeTo(item);
+            curIndex = item;
+        }, function () {
+            autoChange = setInterval(function () {
+                if (curIndex < $("#picShow .pic-ul li").length - 1) { curIndex++; }
+                else { curIndex = 0;}
+                changeTo(curIndex);
+            }, 2000);
+        });
+    });
+
+    function changeTo(num) {
+      $("#picShow .pic-ul").find("li").removeClass("imgOn").hide(1).eq(num).fadeIn().addClass("imgOn");
+      $("#picShow .dots").find("li").removeClass("active").eq(num).addClass("active");
+    }
+});
+  </script>
+</body>
+</html>

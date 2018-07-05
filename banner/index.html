@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.js"></script>
+</head>
+  <style>
+ul {
+    list-style:none;
+}
+.banner {
+    position:relative;
+    overflow:hidden;
+    width: 510px;
+}
+.banner ul {
+    position:relative;
+    }
+.banner ul li {
+    float:left;
+    position:relative;
+
+}
+.spanBox .active {
+  background-image: url('images/carousel_2.png');
+  background-repeat:no-repeat;
+  background-position:center;
+}
+.spanBox span {
+  background-image: url('images/carousel_1.png');
+  background-repeat:no-repeat;
+  background-position:center;
+  padding: 10px;
+}
+.banner .spanBox{
+    position: absolute;
+    top: 375px;
+    left: 150px;
+}
+  </style>
+<body style="background-color: #cfcfde;">
+<div class="banner">
+    <ul class="img">
+      <li><img src="images/1.jpg" alt="" width="400" height="380"/></li>
+    </ul>
+
+    <div class="spanBox">
+          <span class="active">1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+
+    </div>
+</div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+        var i=1;
+        var curIndex=0;
+        var a = $(".spanBox span").length;
+        function move(num) {
+          $(".img li img").attr('src','images/'+i+'.jpg');
+          $(".spanBox").find("span").removeClass("active").eq(num).addClass("active");
+        }
+        var t = setInterval(function(){
+              if (i > a - 1){i=1;}
+              else {i++;}
+              move(i);
+
+        },2000);
+        var box = setInterval(function () {
+              if (curIndex < a - 1) { curIndex++; }
+              else { curIndex = 0;}
+              move(curIndex);
+        }, 2000);
+
+  })
+  </script>
+</body>
+</html>
